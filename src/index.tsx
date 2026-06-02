@@ -1,0 +1,18 @@
+/* @refresh reload */
+import { Route, Router } from '@solidjs/router';
+import { render } from 'solid-js/web';
+import App from './App';
+import './index.css';
+import CreateNote from './pages/create-note';
+import NotePage from './pages/note-page';
+
+render(
+  () => (
+    <Router>
+      <Route path="/" component={App} />
+      <Route path="/create" component={CreateNote} />
+      <Route path="/notes/:id" component={NotePage} />
+    </Router>
+  ),
+  document.getElementById('root')!,
+);
