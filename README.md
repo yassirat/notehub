@@ -1,6 +1,8 @@
-# 📝 Scribble — Note-Hub Web Application
+# 📝 Note-Hub Web Application
 
-Scribble is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4**, and **Zustand**, Scribble delivers an ultra-responsive, distraction-free environment for organizing thoughts, journals, and workspaces.
+![image alt](screenshot.png)
+
+Notehub is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4**.
 
 ---
 
