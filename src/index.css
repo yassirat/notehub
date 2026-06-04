@@ -7,6 +7,13 @@
   --font-main: 'Roboto', sans-serif;
 }
 
+body {
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
 button {
   cursor: pointer;
   font-weight: 500;
