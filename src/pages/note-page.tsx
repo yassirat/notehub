@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from '@solidjs/router';
-import { Pencil, Trash } from 'lucide-solid';
-import { createSignal, onMount } from 'solid-js';
+import { Pencil } from 'lucide-solid';
+import { createSignal, onMount, Show } from 'solid-js';
+import ConfirmModal from '../components/confirm-modal';
 import Header from '../components/header';
 import { getNotes, saveNotes } from '../lib/storage';
 
@@ -11,10 +12,10 @@ export default function NotePage() {
   const navigate = useNavigate();
 
   const note = notes.find((n) => n.id === params.id);
-
   const [title, setTitle] = createSignal(note?.title || '');
-
   const [description, setDescription] = createSignal(note?.description || '');
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = createSignal(false);
 
   if (!note) {
     return <h1>Note not found</h1>;
@@ -36,17 +37,19 @@ export default function NotePage() {
 
     setTimeout(() => {
       navigate('/');
-    }, 500);
+    }, 300);
   };
 
   const deleteNote = () => {
+    setIsDeleteModalOpen(false);
+
     const filtered = notes.filter((n) => n.id !== params.id);
 
     saveNotes(filtered);
 
     setTimeout(() => {
       navigate('/');
-    }, 500);
+    }, 300);
   };
 
   const formatDate = (dateString: string) => {
@@ -77,9 +80,18 @@ export default function NotePage() {
     }
   });
 
+  const isEdited = () => {
+    return title() !== note.title || description() !== note.description;
+  };
+
+  const resetChanges = () => {
+    setTitle(note.title);
+    setDescription(note.description);
+  };
+
   return (
     <article class="min-h-dvh grid grid-rows-[auto_1fr_auto] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
-      <Header />
+      <Header setIsDeleteModalOpen={setIsDeleteModalOpen} />
 
       <main class="p-4">
         <section class="relative max-w-xl mx-auto">
@@ -90,7 +102,7 @@ export default function NotePage() {
               class="w-full p-3 font-semibold capitalize text-xl md:text-2xl focus:outline-none fade"
             />
 
-            <p class="text-xs text-gray-800 dark:text-gray-700 font-medium pl-3 fade">
+            <p class="text-xs text-gray-800 dark:text-gray-400 font-medium pl-3 fade">
               {formatDate(note.createdAt)}
               <span> | </span>
               {description().replace(/\s/g, '').length} characters
@@ -112,21 +124,31 @@ export default function NotePage() {
 
       <footer class="p-4">
         <div class="flex gap-3 justify-end max-w-3xl mx-auto">
-          <button
-            onClick={updateNote}
-            class="bg-emerald-700 hover:bg-emerald-600 text-white transition-colors duration-200 text-xs md:text-sm px-4 py-2 rounded flex items-center gap-2 fade">
-            <Pencil size={18} strokeWidth={2.5} />
-            Update
-          </button>
+          <Show when={isEdited()}>
+            <div class="flex gap-2">
+              <button
+                onClick={updateNote}
+                class="bg-lime-700 hover:bg-lime-600 text-white transition-colors px-4 py-2 rounded-lg flex items-center gap-2">
+                <Pencil size={18} />
+                Save
+              </button>
 
-          <button
-            onClick={deleteNote}
-            class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 text-xs md:text-sm px-4 py-2 rounded flex items-center gap-2 fade">
-            <Trash size={18} strokeWidth={2.5} />
-            Delete
-          </button>
+              <button
+                onClick={resetChanges}
+                class="bg-gray-300 hover:bg-gray-400 transition-colors px-4 py-2 rounded-lg">
+                Cancel
+              </button>
+            </div>
+          </Show>
         </div>
       </footer>
+
+      {/* Localized confirm warnings dialog */}
+      <ConfirmModal
+        isOpen={isDeleteModalOpen()}
+        onConfirm={deleteNote}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </article>
   );
 }
