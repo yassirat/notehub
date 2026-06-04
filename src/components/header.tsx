@@ -1,10 +1,10 @@
 import { A, useLocation } from '@solidjs/router';
-import { Moon, MoveLeft, SquarePen, Sun } from 'lucide-solid';
+import { Moon, MoveLeft, SquarePen, Sun, Trash } from 'lucide-solid';
 import { createEffect, createSignal, Show } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
 
-export default function Header() {
+export default function Header({ setIsDeleteModalOpen }: any) {
   const location = useLocation();
 
   const [darkMode, setDarkMode] = createSignal(false);
@@ -30,9 +30,18 @@ export default function Header() {
           <Show
             when={location.pathname === '/'}
             fallback={
-              <A href="/">
-                <MoveLeft size={24} strokeWidth={2.5} />
-              </A>
+              <>
+                <A href="/">
+                  <MoveLeft size={24} strokeWidth={2.5} />
+                </A>
+                <button
+                  onClick={() => setIsDeleteModalOpen(true)}
+                  title="delete note"
+                  aria-label="delete note"
+                  class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 text-xs md:text-sm p-2 rounded-lg flex items-center gap-2 fade">
+                  <Trash size={18} strokeWidth={2.5} />
+                </button>
+              </>
             }>
             <h1 class="text-2xl font-bold">
               <img src={pencil} alt="logo" class="w-10" />
