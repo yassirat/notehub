@@ -18,8 +18,8 @@
     "lucide-solid": "^1.17.0",
     "marked": "^18.0.4",
     "solid-js": "^1.9.12",
+    "solid-sonner": "^0.3.1",
     "solid-tiptap": "^0.8.0",
-    "sonner": "^2.0.7",
     "tailwindcss": "^4.3.0",
     "zustand": "^5.0.14"
   },
