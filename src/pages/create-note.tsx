@@ -2,6 +2,7 @@ import { useNavigate } from '@solidjs/router';
 import 'easymde/dist/easymde.min.css';
 import { Check } from 'lucide-solid';
 import { createSignal } from 'solid-js';
+import { toast } from 'solid-sonner';
 import Header from '../components/header';
 import { getNotes, saveNotes } from '../lib/storage';
 
@@ -24,9 +25,11 @@ export default function CreateNote() {
 
     saveNotes([...notes, newNote]);
 
+    toast.success('Note has been created');
+
     setTimeout(() => {
       navigate('/');
-    }, 500);
+    }, 300);
   };
 
   return (

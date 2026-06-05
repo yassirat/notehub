@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from '@solidjs/router';
 import { Pencil } from 'lucide-solid';
 import { createSignal, onMount, Show } from 'solid-js';
+
+import { toast } from 'solid-sonner';
 import ConfirmModal from '../components/confirm-modal';
 import Header from '../components/header';
 import { getNotes, saveNotes } from '../lib/storage';
@@ -35,9 +37,7 @@ export default function NotePage() {
 
     saveNotes(updated);
 
-    setTimeout(() => {
-      navigate('/');
-    }, 300);
+    toast.success('Note has been edited');
   };
 
   const deleteNote = () => {
@@ -46,6 +46,8 @@ export default function NotePage() {
     const filtered = notes.filter((n) => n.id !== params.id);
 
     saveNotes(filtered);
+
+    toast.success('Note has been removed');
 
     setTimeout(() => {
       navigate('/');
@@ -87,6 +89,10 @@ export default function NotePage() {
   const resetChanges = () => {
     setTitle(note.title);
     setDescription(note.description);
+
+    setTimeout(() => {
+      navigate('/');
+    }, 100);
   };
 
   return (
@@ -102,7 +108,7 @@ export default function NotePage() {
               class="w-full p-3 font-semibold capitalize text-xl md:text-2xl focus:outline-none fade"
             />
 
-            <p class="text-xs text-gray-800 dark:text-gray-400 font-medium pl-3 fade">
+            <p class="text-xs text-gray-900 dark:text-gray-400 font-medium pl-3 fade">
               {formatDate(note.createdAt)}
               <span> | </span>
               {description().replace(/\s/g, '').length} characters
@@ -113,7 +119,7 @@ export default function NotePage() {
             ref={textareaRef}
             value={description()}
             onInput={handleInput}
-            class="w-full p-3 font-medium focus:outline-none resize-none text-gray-900 dark:text-gray-300 text-sm fade"
+            class="w-full p-3 font-medium focus:outline-none resize-none text-gray-800 dark:text-gray-300 text-sm fade"
             style={{
               'min-height': '100px',
               'max-height': 'none',
@@ -128,14 +134,14 @@ export default function NotePage() {
             <div class="flex gap-2">
               <button
                 onClick={updateNote}
-                class="bg-lime-700 hover:bg-lime-600 text-white transition-colors px-4 py-2 rounded-lg flex items-center gap-2">
+                class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors px-4 py-2 rounded-lg flex items-center gap-2">
                 <Pencil size={18} />
                 Save
               </button>
 
               <button
                 onClick={resetChanges}
-                class="bg-gray-300 hover:bg-gray-400 transition-colors px-4 py-2 rounded-lg">
+                class="bg-gray-300 hover:bg-gray-400 text-sm transition-colors px-4 py-2 rounded-lg">
                 Cancel
               </button>
             </div>
