@@ -35,12 +35,12 @@ importers:
       solid-js:
         specifier: ^1.9.12
         version: 1.9.13
+      solid-sonner:
+        specifier: ^0.3.1
+        version: 0.3.1(solid-js@1.9.13)
       solid-tiptap:
         specifier: ^0.8.0
         version: 0.8.0(@tiptap/core@3.23.6(@tiptap/pm@3.23.6))(@tiptap/pm@3.23.6)(solid-js@1.9.13)
-      sonner:
-        specifier: ^2.0.7
-        version: 2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       tailwindcss:
         specifier: ^4.3.0
         version: 4.3.0
@@ -812,11 +812,6 @@ packages:
   prosemirror-view@1.41.8:
     resolution: {integrity: sha512-TnKDdohEatgyZNGCDWIdccOHXhYloJwbwU+phw/a23KBvJIR9lWQWW7WHHK3vBdOLDNuF7TaX98GObUZOWkOnA==}
 
-  react-dom@19.2.7:
-    resolution: {integrity: sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==}
-    peerDependencies:
-      react: ^19.2.7
-
   react@19.2.7:
     resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
     engines: {node: '>=0.10.0'}
@@ -828,9 +823,6 @@ packages:
 
   rope-sequence@1.3.4:
     resolution: {integrity: sha512-UT5EDe2cu2E/6O4igUr5PSFs23nvvukicWHx6GnOPlHAiiYbzNuCRQCuiUdHJQcqKalLKlrYJnjY0ySGsXNQXQ==}
-
-  scheduler@0.27.0:
-    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -854,6 +846,11 @@ packages:
     peerDependencies:
       solid-js: ^1.3
 
+  solid-sonner@0.3.1:
+    resolution: {integrity: sha512-F/+zi9yKJTHh5hX1UGJfkDvyC+F34Vi3jgy44NJwOKCgic1QtAon0b1iT9OsDO77RTgR+PCil+3Y5B8T2Owy1Q==}
+    peerDependencies:
+      solid-js: ^1.6.0
+
   solid-tiptap@0.8.0:
     resolution: {integrity: sha512-SiwfZhpuI57iuyJmCMv5YvsjFdO6Gyy8L/ynBamvWCT2r0L9Hk/3Dj/zfCufGAiHeEdSWK+6fGhmZ8dbvMJRaA==}
     engines: {node: '>=10'}
@@ -861,12 +858,6 @@ packages:
       '@tiptap/core': ^3
       '@tiptap/pm': ^3
       solid-js: ^1.7
-
-  sonner@2.0.7:
-    resolution: {integrity: sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
-      react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -1698,12 +1689,8 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.12.0
 
-  react-dom@19.2.7(react@19.2.7):
-    dependencies:
-      react: 19.2.7
-      scheduler: 0.27.0
-
-  react@19.2.7: {}
+  react@19.2.7:
+    optional: true
 
   rolldown@1.0.1:
     dependencies:
@@ -1728,8 +1715,6 @@ snapshots:
 
   rope-sequence@1.3.4: {}
 
-  scheduler@0.27.0: {}
-
   semver@6.3.1: {}
 
   seroval-plugins@1.5.4(seroval@1.5.4):
@@ -1753,16 +1738,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  solid-sonner@0.3.1(solid-js@1.9.13):
+    dependencies:
+      solid-js: 1.9.13
+
   solid-tiptap@0.8.0(@tiptap/core@3.23.6(@tiptap/pm@3.23.6))(@tiptap/pm@3.23.6)(solid-js@1.9.13):
     dependencies:
       '@tiptap/core': 3.23.6(@tiptap/pm@3.23.6)
       '@tiptap/pm': 3.23.6
       solid-js: 1.9.13
-
-  sonner@2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
-    dependencies:
-      react: 19.2.7
-      react-dom: 19.2.7(react@19.2.7)
 
   source-map-js@1.2.1: {}
 
