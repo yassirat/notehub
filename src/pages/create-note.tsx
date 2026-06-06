@@ -54,7 +54,8 @@ export default function CreateNote() {
               e.currentTarget.style.height = 'auto';
               e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
             }}
-            class="w-full p-3 mb-4 text-sm lg:text-base focus:outline-none resize-none overflow-hidden placeholder:font-normal font-medium text-gray-800 dark:text-gray-300 fade"></textarea>
+            class="w-full p-3 mb-4 text-sm lg:text-base focus:outline-none resize-none overflow-hidden placeholder:font-normal font-medium text-gray-800 dark:text-gray-300 fade"
+            autofocus></textarea>
 
           <button
             onClick={handleSave}

@@ -141,7 +141,7 @@ export default function NotePage() {
 
               <button
                 onClick={resetChanges}
-                class="bg-gray-300 hover:bg-gray-400 text-sm transition-colors px-4 py-2 rounded-lg">
+                class="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600   text-sm transition-colors px-4 py-2 rounded-lg">
                 Cancel
               </button>
             </div>
