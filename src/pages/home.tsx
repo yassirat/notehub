@@ -45,8 +45,7 @@ export default function Home() {
           {(note) => (
             <A
               href={`/notes/${note.id}`}
-              class="rounded-md p-4 bg-neutral-50 dark:bg-black hover:bg-gray-100 dark:hover:bg-neutral-900/85 transition-colors duration-200 fade"
-              style={{ 'box-shadow': 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}>
+              class="rounded-md p-4 bg-neutral-50 dark:bg-black hover:bg-gray-100 dark:hover:bg-neutral-900/85 transition-colors duration-200 fade shadow-note dark:shadow-note-dark">
               <div class="grid gap-0.5 mb-1">
                 <h2 class="font-semibold text-lg lg:text-xl capitalize">
                   {note.title}
