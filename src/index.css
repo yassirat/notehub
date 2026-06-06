@@ -4,7 +4,9 @@
 /* @variant dark (&:where(.dark, .dark *)); */
 
 @theme {
-  --font-main: 'Roboto', sans-serif;
+  --font-main: 'Geist', sans-serif;
+  --shadow-note: 0px 7px 29px 0px rgba(0, 0, 0, 0.05);
+  --shadow-note-dark: 0px 7px 29px 0px rgba(240, 237, 237, 0.08);
 }
 
 body {
