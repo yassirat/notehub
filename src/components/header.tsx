@@ -30,9 +30,10 @@ export default function Header({ setIsDeleteModalOpen }: any) {
           <Switch>
             {/* Home route */}
             <Match when={location.pathname === '/'}>
-              <h1 class="text-2xl font-bold">
-                <img src={pencil} alt="logo" class="w-10" />
-              </h1>
+              <div class="flex items-center gap-2">
+                <img src={pencil} alt="logo" class="w-8" />
+                <h1 class="text-xl font-bold hidden md:block">NotoHub</h1>
+              </div>
               <div class="flex gap-4">
                 <A
                   href="/create"
