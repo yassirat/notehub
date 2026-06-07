@@ -51,7 +51,7 @@ export default function NotePage() {
 
     setTimeout(() => {
       navigate('/');
-    }, 300);
+    }, 50);
   };
 
   const formatDate = (dateString: string) => {
@@ -101,14 +101,14 @@ export default function NotePage() {
 
       <main class="p-4">
         <section class="relative max-w-xl mx-auto">
-          <div class="grid mb-4">
+          <div class="mb-2 -space-y-2">
             <input
               value={title()}
               onInput={(e) => setTitle(e.currentTarget.value)}
-              class="w-full p-3 font-semibold capitalize text-xl md:text-2xl focus:outline-none fade"
+              class="w-full p-3 font-semibold capitalize text-lg focus:outline-none fade"
             />
 
-            <p class="text-xs text-gray-900 dark:text-gray-400 font-medium pl-3 fade">
+            <p class="text-xs text-gray-900 dark:text-gray-500 font-medium pl-3 fade">
               {formatDate(note.createdAt)}
               <span> | </span>
               {description().replace(/\s/g, '').length} characters
@@ -119,7 +119,7 @@ export default function NotePage() {
             ref={textareaRef}
             value={description()}
             onInput={handleInput}
-            class="w-full p-3 font-medium focus:outline-none resize-none text-gray-800 dark:text-gray-300 text-sm fade"
+            class="w-full p-3 focus:outline-none resize-none font-medium text-gray-900 dark:text-gray-300 text-sm leading-relaxed fade"
             style={{
               'min-height': '100px',
               'max-height': 'none',

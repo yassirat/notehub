@@ -25,7 +25,7 @@ export default function Home() {
     <div class="min-h-dvh bg-neutral-100 dark:bg-neutral-950 dark:text-white grid grid-rows-[auto_1fr] font-main">
       <Header />
 
-      <div class="flex flex-col gap-4 w-full px-6 mt-8 max-w-2xl mx-auto">
+      <div class="flex flex-col gap-4 w-full px-6 mt-8 max-w-xl mx-auto">
         <For
           each={notes.sort(
             (a, b) => getLastModifiedDate(b) - getLastModifiedDate(a),
@@ -45,18 +45,16 @@ export default function Home() {
           {(note) => (
             <A
               href={`/notes/${note.id}`}
-              class="rounded-md p-4 bg-neutral-50 dark:bg-black hover:bg-gray-100 dark:hover:bg-neutral-900/85 transition-colors duration-200 fade shadow-note dark:shadow-note-dark">
-              <div class="grid gap-0.5 mb-1">
-                <h2 class="font-semibold text-lg lg:text-xl capitalize">
-                  {note.title}
-                </h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm font-medium">
+              class="rounded-md px-4 py-2 bg-neutral-50 dark:bg-black transition-transform duration-200 hover:-translate-y-1 fade shadow-note dark:shadow-note-dark">
+              <div class="grid mb-1">
+                <h2 class="font-semibold text-lg capitalize">{note.title}</h2>
+                <p class="text-neutral-800 dark:text-neutral-400 text-sm font-medium">
                   {note.description.length > 40
                     ? `${note.description.split('\n')[0].slice(0, 40)}...`
                     : note.description.split('\n')[0]}
                 </p>
               </div>
-              <p class="text-xs font-medium text-neutral-500">
+              <p class="text-xs font-medium text-neutral-600">
                 {formatDate(note.createdAt)}
               </p>
             </A>
