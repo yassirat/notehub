@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router';
-import { StickyNotes } from 'lucide-solid';
+import { SquarePen, StickyNotes } from 'lucide-solid';
 import { For } from 'solid-js';
 import Header from '../components/header';
 import { getNotes } from '../lib/storage';
@@ -22,10 +22,10 @@ export default function Home() {
   };
 
   return (
-    <div class="min-h-dvh bg-neutral-100 dark:bg-neutral-950 dark:text-white grid grid-rows-[auto_1fr] font-main">
+    <article class="min-h-dvh bg-neutral-100 dark:bg-neutral-950 dark:text-white grid grid-rows-[auto_1fr_auto] font-main">
       <Header />
 
-      <div class="flex flex-col gap-4 w-full px-6 mt-8 max-w-xl mx-auto">
+      <section class="relative flex flex-col gap-4 w-full px-6 mt-8 max-w-xl mx-auto">
         <For
           each={notes.sort(
             (a, b) => getLastModifiedDate(b) - getLastModifiedDate(a),
@@ -60,7 +60,12 @@ export default function Home() {
             </A>
           )}
         </For>
-      </div>
-    </div>
+        <A
+          href="/create"
+          class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black p-2 md:p-3 rounded-full font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 fade absolute bottom-4 right-4">
+          <SquarePen size={18} strokeWidth={2.5} class="md:size-4" />
+        </A>
+      </section>
+    </article>
   );
 }
