@@ -45,9 +45,9 @@ export default function Home() {
           {(note) => (
             <A
               href={`/notes/${note.id}`}
-              class="rounded-md px-4 py-2 bg-neutral-50 dark:bg-black transition-transform duration-200 hover:-translate-y-1 fade shadow-note dark:shadow-note-dark">
+              class="rounded-md p-4 bg-neutral-50 dark:bg-black transition-transform duration-200 hover:-translate-y-1 fade shadow-note dark:shadow-note-dark">
               <div class="grid mb-1">
-                <h2 class="font-semibold text-lg capitalize">{note.title}</h2>
+                <h2 class="font-semibold capitalize">{note.title}</h2>
                 <p class="text-neutral-800 dark:text-neutral-400 text-sm font-medium">
                   {note.description.length > 40
                     ? `${note.description.split('\n')[0].slice(0, 40)}...`

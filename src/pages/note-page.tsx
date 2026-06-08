@@ -100,15 +100,15 @@ export default function NotePage() {
       <Header setIsDeleteModalOpen={setIsDeleteModalOpen} />
 
       <main class="p-4">
-        <section class="relative max-w-xl mx-auto">
+        <section class="max-w-xl mx-auto">
           <div class="mb-2 -space-y-2">
             <input
               value={title()}
               onInput={(e) => setTitle(e.currentTarget.value)}
-              class="w-full p-3 font-semibold capitalize text-lg focus:outline-none fade"
+              class="w-full p-3 font-semibold capitalize focus:outline-none fade"
             />
 
-            <p class="text-xs text-gray-900 dark:text-gray-500 font-medium pl-3 fade">
+            <p class="text-xs text-gray-700 dark:text-gray-500 font-medium pl-3 fade">
               {formatDate(note.createdAt)}
               <span> | </span>
               {description().replace(/\s/g, '').length} characters
