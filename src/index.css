@@ -4,7 +4,7 @@
 /* @variant dark (&:where(.dark, .dark *)); */
 
 @theme {
-  --font-main: 'Geist', sans-serif;
+  --font-main: 'IBM Plex Sans', sans-serif;
   --shadow-note: 0px 7px 29px 0px rgba(0, 0, 0, 0.05);
   --shadow-note-dark: 0px 7px 29px 0px rgba(240, 237, 237, 0.08);
 }
@@ -24,11 +24,13 @@ button {
 .fade {
   animation: fadeIn 0.4s ease-out forwards;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
