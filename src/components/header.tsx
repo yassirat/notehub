@@ -1,5 +1,5 @@
 import { A, useLocation } from '@solidjs/router';
-import { Moon, MoveLeft, SquarePen, Sun, Trash } from 'lucide-solid';
+import { Moon, MoveLeft, SquarePen, Sun, Trash2Icon } from 'lucide-solid';
 import { createEffect, createSignal, Match, Switch } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
@@ -37,8 +37,8 @@ export default function Header({ setIsDeleteModalOpen }: any) {
               <div class="flex gap-4">
                 <A
                   href="/create"
-                  class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black px-4 py-2 rounded-lg font-medium text-sm transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 flex items-center gap-2 fade">
-                  <SquarePen size={18} strokeWidth={2.5} />
+                  class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black px-4 py-2 rounded-lg font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 flex items-center gap-2 fade">
+                  <SquarePen size={16} strokeWidth={2.5} />
                   Create
                 </A>
                 <button
@@ -47,9 +47,9 @@ export default function Header({ setIsDeleteModalOpen }: any) {
                   aria-label="Change theme"
                   class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900">
                   {darkMode() ? (
-                    <Sun size={20} strokeWidth={2.5} fill="true" />
+                    <Sun size={18} strokeWidth={2.5} fill="true" />
                   ) : (
-                    <Moon size={20} strokeWidth={2.5} fill="true" />
+                    <Moon size={18} strokeWidth={2.5} fill="true" />
                   )}
                 </button>
               </div>
@@ -72,7 +72,7 @@ export default function Header({ setIsDeleteModalOpen }: any) {
                 title="delete note"
                 aria-label="delete note"
                 class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 text-xs md:text-sm p-2 rounded-lg flex items-center gap-2 fade">
-                <Trash size={18} strokeWidth={2.5} />
+                <Trash2Icon size={16} strokeWidth={2.5} />
               </button>
             </Match>
           </Switch>
