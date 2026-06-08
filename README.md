@@ -2,7 +2,7 @@
 
 ![image alt](screenshot.png)
 
-Notehub is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4**.
+NotoHub is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4**.
 
 ---
 
