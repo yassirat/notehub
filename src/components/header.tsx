@@ -1,5 +1,5 @@
 import { A, useLocation } from '@solidjs/router';
-import { Moon, MoveLeft, SquarePen, Sun, Trash2Icon } from 'lucide-solid';
+import { Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
 import { createEffect, createSignal, Match, Switch } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
@@ -34,13 +34,18 @@ export default function Header({ setIsDeleteModalOpen }: any) {
                 <img src={pencil} alt="logo" class="w-8" />
                 <h1 class="text-xl font-bold hidden md:block">NotoHub</h1>
               </div>
-              <div class="flex gap-4">
+              <div class="flex items-center gap-4">
                 <A
+                  href="/about"
+                  class="text-sm font-medium fade dark:text-white">
+                  About
+                </A>
+                {/* <A
                   href="/create"
                   class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black px-4 py-2 rounded-lg font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 flex items-center gap-2 fade">
                   <SquarePen size={16} strokeWidth={2.5} />
                   Create
-                </A>
+                </A> */}
                 <button
                   type="button"
                   onClick={toggleDarkMode}
@@ -57,6 +62,13 @@ export default function Header({ setIsDeleteModalOpen }: any) {
 
             {/* Create route */}
             <Match when={location.pathname === '/create'}>
+              <A href="/">
+                <MoveLeft size={24} strokeWidth={2.5} />
+              </A>
+            </Match>
+
+            {/* About route */}
+            <Match when={location.pathname === '/about'}>
               <A href="/">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
