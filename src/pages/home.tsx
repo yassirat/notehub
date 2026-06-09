@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router';
-import { SquarePen, StickyNotes } from 'lucide-solid';
+import { PlusIcon, StickyNotes } from 'lucide-solid';
 import { For } from 'solid-js';
 import Header from '../components/header';
 import { getNotes } from '../lib/storage';
@@ -62,8 +62,8 @@ export default function Home() {
         </For>
         <A
           href="/create"
-          class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black p-2 md:p-3 rounded-full font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 fade absolute bottom-4 right-4">
-          <SquarePen size={18} strokeWidth={2.5} class="md:size-4" />
+          class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black p-2 md:p-3 rounded-full font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 fade fixed bottom-4 right-4">
+          <PlusIcon size={18} strokeWidth={2.5} class="md:size-4" />
         </A>
       </section>
     </article>
