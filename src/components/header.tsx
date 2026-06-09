@@ -1,10 +1,14 @@
 import { A, useLocation } from '@solidjs/router';
-import { Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
+import { Eye, EyeOff, Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
 import { createEffect, createSignal, Match, Switch } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
 
-export default function Header({ setIsDeleteModalOpen }: any) {
+export default function Header({
+  setIsDeleteModalOpen,
+  showPreview,
+  setShowPreview,
+}: any) {
   const location = useLocation();
 
   const [darkMode, setDarkMode] = createSignal(false);
@@ -79,13 +83,24 @@ export default function Header({ setIsDeleteModalOpen }: any) {
               <A href="/">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
-              <button
-                onClick={() => setIsDeleteModalOpen(true)}
-                title="delete note"
-                aria-label="delete note"
-                class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 text-xs md:text-sm p-2 rounded-lg flex items-center gap-2 fade">
-                <Trash2Icon size={16} strokeWidth={2.5} />
-              </button>
+              <div class="flex items-center gap-4">
+                <button
+                  onclick={() => setShowPreview(!showPreview())}
+                  class="p-2 bg-blue-600 text-white rounded-lg text-xs transition-all duration-300 ease-in-out">
+                  {showPreview() ? (
+                    <EyeOff size={16} strokeWidth={2.5} class="hide-show" />
+                  ) : (
+                    <Eye size={16} strokeWidth={2.5} class="hide-show" />
+                  )}
+                </button>
+                <button
+                  onClick={() => setIsDeleteModalOpen(true)}
+                  title="delete note"
+                  aria-label="delete note"
+                  class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
+                  <Trash2Icon size={16} strokeWidth={2.5} />
+                </button>
+              </div>
             </Match>
           </Switch>
         </nav>
