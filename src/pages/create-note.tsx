@@ -62,7 +62,7 @@ export default function CreateNote() {
           ) : (
             <div
               class="w-full p-3 mb-4 text-sm lg:text-base min-h-50 shadow-note-dark text-gray-800 dark:text-gray-300 fade"
-              innerHTML={marked(description())}
+              innerHTML={marked.parse(description()) as string}
             />
           )}
 

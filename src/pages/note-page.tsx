@@ -135,7 +135,7 @@ export default function NotePage() {
           ) : (
             <div
               class="w-full p-3 mb-4 text-sm lg:text-base min-h-50 shadow-note-dark leading-relaxed"
-              innerHTML={marked(description())}
+              innerHTML={marked.parse(description()) as string}
             />
           )}
         </section>
