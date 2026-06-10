@@ -2,7 +2,6 @@ import { useNavigate, useParams } from '@solidjs/router';
 import { Pencil } from 'lucide-solid';
 import { createSignal, onMount, Show } from 'solid-js';
 
-import { marked } from 'marked';
 import { toast } from 'solid-sonner';
 import ConfirmModal from '../components/confirm-modal';
 import Header from '../components/header';
@@ -17,7 +16,6 @@ export default function NotePage() {
   const note = notes.find((n) => n.id === params.id);
   const [title, setTitle] = createSignal(note?.title || '');
   const [description, setDescription] = createSignal(note?.description || '');
-  const [showPreview, setShowPreview] = createSignal(false);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = createSignal(false);
 
@@ -99,11 +97,7 @@ export default function NotePage() {
 
   return (
     <article class="min-h-dvh grid grid-rows-[auto_1fr_auto] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
-      <Header
-        setIsDeleteModalOpen={setIsDeleteModalOpen}
-        showPreview={showPreview}
-        setShowPreview={setShowPreview}
-      />
+      <Header setIsDeleteModalOpen={setIsDeleteModalOpen} />
 
       <main class="p-4">
         <section class="max-w-xl mx-auto">
@@ -121,23 +115,16 @@ export default function NotePage() {
             </p>
           </div>
 
-          {!showPreview() ? (
-            <textarea
-              ref={textareaRef}
-              value={description()}
-              onInput={handleInput}
-              class="w-full p-3 focus:outline-none resize-none font-medium text-gray-900 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
-              style={{
-                'min-height': '100px',
-                'max-height': 'none',
-                overflow: 'hidden',
-              }}></textarea>
-          ) : (
-            <div
-              class="w-full p-3 mb-4 text-sm lg:text-base min-h-50 shadow-note-dark leading-relaxed"
-              innerHTML={marked.parse(description()) as string}
-            />
-          )}
+          <textarea
+            ref={textareaRef}
+            value={description()}
+            onInput={handleInput}
+            class="w-full p-3 focus:outline-none resize-none font-medium text-gray-900 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
+            style={{
+              'min-height': '100px',
+              'max-height': 'none',
+              overflow: 'hidden',
+            }}></textarea>
         </section>
       </main>
 
@@ -147,6 +134,7 @@ export default function NotePage() {
             <div class="flex gap-2">
               <button
                 onClick={updateNote}
+                aria-label="Edit note"
                 class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors px-4 py-2 rounded-lg flex items-center gap-2">
                 <Pencil size={18} />
                 Save
@@ -154,6 +142,7 @@ export default function NotePage() {
 
               <button
                 onClick={resetChanges}
+                aria-label="Cancel changes"
                 class="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600   text-sm transition-colors px-4 py-2 rounded-lg">
                 Cancel
               </button>
