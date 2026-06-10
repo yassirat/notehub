@@ -1,14 +1,10 @@
 import { A, useLocation } from '@solidjs/router';
-import { Eye, EyeOff, Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
+import { Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
 import { createEffect, createSignal, Match, Switch } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
 
-export default function Header({
-  setIsDeleteModalOpen,
-  showPreview,
-  setShowPreview,
-}: any) {
+export default function Header({ setIsDeleteModalOpen }: any) {
   const location = useLocation();
 
   const [darkMode, setDarkMode] = createSignal(false);
@@ -41,6 +37,7 @@ export default function Header({
               <div class="flex items-center gap-4">
                 <A
                   href="/about"
+                  aria-label="Go to about"
                   class="text-sm font-medium fade dark:text-white">
                   About
                 </A>
@@ -66,41 +63,31 @@ export default function Header({
 
             {/* Create route */}
             <Match when={location.pathname === '/create'}>
-              <A href="/">
+              <A href="/" aria-label="Go back">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
             </Match>
 
             {/* About route */}
             <Match when={location.pathname === '/about'}>
-              <A href="/">
+              <A href="/" aria-label="Go back">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
             </Match>
 
             {/* Note detail route */}
             <Match when={location.pathname.startsWith('/notes/')}>
-              <A href="/">
+              <A href="/" aria-label="Go back">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
-              <div class="flex items-center gap-4">
-                <button
-                  onclick={() => setShowPreview(!showPreview())}
-                  class="p-2 bg-blue-600 text-white rounded-lg text-xs transition-all duration-300 ease-in-out">
-                  {showPreview() ? (
-                    <EyeOff size={16} strokeWidth={2.5} class="hide-show" />
-                  ) : (
-                    <Eye size={16} strokeWidth={2.5} class="hide-show" />
-                  )}
-                </button>
-                <button
-                  onClick={() => setIsDeleteModalOpen(true)}
-                  title="delete note"
-                  aria-label="delete note"
-                  class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
-                  <Trash2Icon size={16} strokeWidth={2.5} />
-                </button>
-              </div>
+
+              <button
+                onClick={() => setIsDeleteModalOpen(true)}
+                title="delete note"
+                aria-label="Delete note"
+                class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
+                <Trash2Icon size={16} strokeWidth={2.5} />
+              </button>
             </Match>
           </Switch>
         </nav>
