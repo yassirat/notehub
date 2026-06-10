@@ -1,4 +1,4 @@
-# 📝 Note-Hub Web Application
+# 📝 NotoHub Web Application
 
 ![image alt](screenshot.png)
 
