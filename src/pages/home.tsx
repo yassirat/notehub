@@ -63,7 +63,7 @@ export default function Home() {
         <A
           href="/create"
           class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black p-2 md:p-3 rounded-full font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 fade fixed bottom-4 right-4">
-          <PlusIcon size={18} strokeWidth={2.5} class="md:size-4" />
+          <PlusIcon size={20} strokeWidth={2.5} class="md:size-4" />
         </A>
       </section>
     </article>
