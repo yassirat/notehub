@@ -1,10 +1,16 @@
 import { A, useLocation } from '@solidjs/router';
-import { Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
-import { createEffect, createSignal, Match, Switch } from 'solid-js';
+import { CheckIcon, Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
+import { createEffect, createSignal, Match, Show, Switch } from 'solid-js';
 
 import pencil from '/pencil_3075908.png';
 
-export default function Header({ setIsDeleteModalOpen }: any) {
+interface HeaderProps {
+  setIsDeleteModalOpen: (value: boolean) => void;
+  isEdited: () => boolean; // It's a function
+  updateNote: () => void;
+}
+
+export default function Header(props: HeaderProps) {
   const location = useLocation();
 
   const [darkMode, setDarkMode] = createSignal(false);
@@ -41,12 +47,6 @@ export default function Header({ setIsDeleteModalOpen }: any) {
                   class="text-sm font-medium fade dark:text-white">
                   About
                 </A>
-                {/* <A
-                  href="/create"
-                  class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black px-4 py-2 rounded-lg font-medium text-xs transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 flex items-center gap-2 fade">
-                  <SquarePen size={16} strokeWidth={2.5} />
-                  Create
-                </A> */}
                 <button
                   type="button"
                   onClick={toggleDarkMode}
@@ -80,14 +80,23 @@ export default function Header({ setIsDeleteModalOpen }: any) {
               <A href="/" aria-label="Go back">
                 <MoveLeft size={24} strokeWidth={2.5} />
               </A>
-
-              <button
-                onClick={() => setIsDeleteModalOpen(true)}
-                title="delete note"
-                aria-label="Delete note"
-                class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
-                <Trash2Icon size={16} strokeWidth={2.5} />
-              </button>
+              <div class="flex gap-4">
+                <Show when={props.isEdited()}>
+                  <button
+                    onClick={props.updateNote}
+                    aria-label="Edit note"
+                    class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors p-2 rounded-lg fade">
+                    <CheckIcon size={16} strokeWidth={2.5} />
+                  </button>
+                </Show>
+                <button
+                  onClick={() => props.setIsDeleteModalOpen(true)}
+                  title="delete note"
+                  aria-label="Delete note"
+                  class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
+                  <Trash2Icon size={16} strokeWidth={2.5} />
+                </button>
+              </div>
             </Match>
           </Switch>
         </nav>
