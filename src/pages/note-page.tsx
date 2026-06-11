@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from '@solidjs/router';
-import { Pencil } from 'lucide-solid';
-import { createSignal, onMount, Show } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 
 import { toast } from 'solid-sonner';
 import ConfirmModal from '../components/confirm-modal';
@@ -86,18 +85,13 @@ export default function NotePage() {
     return title() !== note.title || description() !== note.description;
   };
 
-  const resetChanges = () => {
-    setTitle(note.title);
-    setDescription(note.description);
-
-    setTimeout(() => {
-      navigate('/');
-    }, 100);
-  };
-
   return (
-    <article class="min-h-dvh grid grid-rows-[auto_1fr_auto] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
-      <Header setIsDeleteModalOpen={setIsDeleteModalOpen} />
+    <article class="min-h-dvh grid grid-rows-[auto_1fr] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
+      <Header
+        setIsDeleteModalOpen={setIsDeleteModalOpen}
+        isEdited={isEdited}
+        updateNote={updateNote}
+      />
 
       <main class="p-4">
         <section class="max-w-xl mx-auto">
@@ -127,29 +121,6 @@ export default function NotePage() {
             }}></textarea>
         </section>
       </main>
-
-      <footer class="p-4">
-        <div class="flex gap-3 justify-end max-w-3xl mx-auto">
-          <Show when={isEdited()}>
-            <div class="flex gap-2">
-              <button
-                onClick={updateNote}
-                aria-label="Edit note"
-                class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors px-4 py-2 rounded-lg flex items-center gap-2">
-                <Pencil size={18} />
-                Save
-              </button>
-
-              <button
-                onClick={resetChanges}
-                aria-label="Cancel changes"
-                class="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600   text-sm transition-colors px-4 py-2 rounded-lg">
-                Cancel
-              </button>
-            </div>
-          </Show>
-        </div>
-      </footer>
 
       {/* Localized confirm warnings dialog */}
       <ConfirmModal
