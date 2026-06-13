@@ -28,6 +28,5 @@ NotoHub is a premium, production-ready, minimalist note-taking web application d
 ## 🧪 Testing Locally
 
 1. **Rich Text Composition:** Navigate to `/create` (by clicking the "Create Note" button), write some headings, bullet lists, or bold text. Select a Notebook category and click "Save Note."
-2. **Dynamic Filtering:** Use the search bar or tags list in the sidebar. Click a tag chip to instantly filter the dashboard view.
-3. **Locale Swapping:** Click the language switcher dropdown in the navigation. Set it to French or Arabic. The layout instantly mirrors naturally to Right-To-Left (RTL) for Arabic.
-4. **CRUD Integrity & Modal Alerts:** Navigate to `/note/:id` to read your note. Click "Delete Note." A localized warning dialog will prompt you to confirm or cancel the operation.
+2. **Locale Swapping:** Click the language switcher dropdown in the navigation. Set it to French or Arabic. The layout instantly mirrors naturally to Right-To-Left (RTL) for Arabic.
+3. **CRUD Integrity & Modal Alerts:** Navigate to `/note/:id` to read your note. Click "Delete Note." A localized warning dialog will prompt you to confirm or cancel the operation.
