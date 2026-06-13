@@ -1,56 +1,68 @@
 import { useNavigate, useParams } from '@solidjs/router';
-import { createSignal, onMount } from 'solid-js';
+import { createEffect, createSignal, onMount } from 'solid-js';
 
 import { toast } from 'solid-sonner';
 import ConfirmModal from '../components/confirm-modal';
 import Header from '../components/header';
-import { getNotes, saveNotes } from '../lib/storage';
+import Loading from '../components/loading';
+import { useNotes } from '../context/note-context';
 
 export default function NotePage() {
-  const notes = getNotes();
+  const { getNoteById, updateNote, deleteNote } = useNotes();
 
   const params = useParams();
   const navigate = useNavigate();
 
-  const note = notes.find((n) => n.id === params.id);
+  const note = getNoteById(params.id!);
   const [title, setTitle] = createSignal(note?.title || '');
   const [description, setDescription] = createSignal(note?.description || '');
+  const [loading, setLoading] = createSignal(false);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = createSignal(false);
 
+  // Initialize form with note data
+  createEffect(() => {
+    if (note) {
+      setTitle(note.title);
+      setDescription(note.description);
+    }
+  });
+
   if (!note) {
-    return <h1>Note not found</h1>;
+    return <h1 class="text-center text-2xl mt-10">Note not found</h1>;
   }
 
-  const updateNote = () => {
-    const updated = notes.map((n) =>
-      n.id === params.id
-        ? {
-            ...n,
-            title: title(),
-            description: description(),
-            updatedAt: new Date().toISOString(),
-          }
-        : n,
-    );
+  const handleUpdate = async () => {
+    setLoading(true);
 
-    saveNotes(updated);
-
-    toast.success('Note has been edited');
+    try {
+      await updateNote(note.id, title(), description());
+      toast.success('Note has been edited');
+    } catch (error) {
+      toast.error('Failed to update note');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const deleteNote = () => {
+  const handleDelete = async () => {
     setIsDeleteModalOpen(false);
+    setLoading(true);
 
-    const filtered = notes.filter((n) => n.id !== params.id);
+    try {
+      await deleteNote(note.id);
+      toast.success('Note has been removed');
 
-    saveNotes(filtered);
-
-    toast.success('Note has been removed');
-
-    setTimeout(() => {
-      navigate('/');
-    }, 50);
+      setTimeout(() => {
+        navigate('/');
+      }, 300);
+    } catch (error) {
+      toast.error('Failed to delete note');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -85,12 +97,16 @@ export default function NotePage() {
     return title() !== note.title || description() !== note.description;
   };
 
+  if (loading()) {
+    return <Loading />;
+  }
+
   return (
     <article class="min-h-dvh grid grid-rows-[auto_1fr] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
       <Header
         setIsDeleteModalOpen={setIsDeleteModalOpen}
         isEdited={isEdited}
-        updateNote={updateNote}
+        updateNote={handleUpdate}
       />
 
       <main class="p-4">
@@ -103,7 +119,7 @@ export default function NotePage() {
             />
 
             <p class="text-xs text-gray-700 dark:text-gray-500 font-medium pl-3 fade">
-              {formatDate(note.createdAt)}
+              {formatDate(note.updated_at || note.created_at)}
               <span> | </span>
               {description().replace(/\s/g, '').length} characters
             </p>
@@ -125,7 +141,7 @@ export default function NotePage() {
       {/* Localized confirm warnings dialog */}
       <ConfirmModal
         isOpen={isDeleteModalOpen()}
-        onConfirm={deleteNote}
+        onConfirm={handleDelete}
         onCancel={() => setIsDeleteModalOpen(false)}
       />
     </article>

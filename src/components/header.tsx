@@ -1,7 +1,15 @@
 import { A, useLocation } from '@solidjs/router';
-import { CheckIcon, Moon, MoveLeft, Sun, Trash2Icon } from 'lucide-solid';
+import {
+  CheckIcon,
+  Moon,
+  MoveLeft,
+  Sun,
+  Trash2Icon,
+  UserRound,
+} from 'lucide-solid';
 import { createEffect, createSignal, Match, Show, Switch } from 'solid-js';
 
+import { useNotes } from '../context/note-context';
 import pencil from '/pencil_3075908.png';
 
 interface HeaderProps {
@@ -12,6 +20,8 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   const location = useLocation();
+
+  const { loading } = useNotes();
 
   const [darkMode, setDarkMode] = createSignal(false);
 
@@ -39,12 +49,13 @@ export default function Header(props: HeaderProps) {
               <img src={pencil} alt="logo" class="w-8" />
               <h1 class="text-xl font-bold hidden md:block">NotoHub</h1>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
               <A
-                href="/about"
-                aria-label="Go to about"
-                class="text-sm font-medium fade dark:text-white">
-                About
+                href="/user"
+                title="profile"
+                aria-label="Go to user profile"
+                class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900">
+                <UserRound size={18} strokeWidth={2.5} />
               </A>
               <button
                 type="button"
@@ -62,7 +73,10 @@ export default function Header(props: HeaderProps) {
           </Match>
 
           {/* Create route */}
-          <Match when={location.pathname === '/create'}>
+          <Match
+            when={
+              location.pathname === '/create' || location.pathname === '/user'
+            }>
             <A href="/" aria-label="Go back">
               <MoveLeft size={24} strokeWidth={2.5} />
             </A>
@@ -87,8 +101,16 @@ export default function Header(props: HeaderProps) {
                   onClick={props.updateNote}
                   title="Edit note"
                   aria-label="Edit note"
-                  class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors p-2 rounded-lg fade">
-                  <CheckIcon size={16} strokeWidth={2.5} />
+                  disabled={loading()}
+                  class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors p-2 rounded-lg hide-show disabled:opacity-50">
+                  {loading() ? (
+                    'Saving...'
+                  ) : (
+                    <div class="flex items-center gap-2 px-1">
+                      <CheckIcon size={16} strokeWidth={2.5} />
+                      <span class="hidden sm:block">Edit</span>
+                    </div>
+                  )}
                 </button>
               </Show>
               <button

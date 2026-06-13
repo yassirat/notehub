@@ -3,32 +3,37 @@ import { Check } from 'lucide-solid';
 import { createSignal } from 'solid-js';
 import { toast } from 'solid-sonner';
 import Header from '../components/header';
-import { getNotes, saveNotes } from '../lib/storage';
+import { useNotes } from '../context/note-context';
 
 export default function CreateNote() {
+  const { createNote } = useNotes();
   const navigate = useNavigate();
 
   const [title, setTitle] = createSignal('');
   const [description, setDescription] = createSignal('');
+  const [loading, setLoading] = createSignal(false);
 
-  const handleSave = () => {
-    const notes = getNotes();
+  const handleSave = async () => {
+    if (!title().trim()) {
+      toast.error('Title is required');
+      return;
+    }
 
-    const newNote = {
-      id: Math.random().toString(36).substring(2, 11),
-      title: title(),
-      description: description(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    setLoading(true);
 
-    saveNotes([...notes, newNote]);
+    try {
+      await createNote(title(), description());
+      toast.success('Note created successfully');
 
-    toast.success('Note has been created');
-
-    setTimeout(() => {
-      navigate('/');
-    }, 300);
+      setTimeout(() => {
+        navigate('/');
+      }, 300);
+    } catch (error) {
+      toast.error('Failed to create note');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -59,10 +64,17 @@ export default function CreateNote() {
           <div class="mt-4 float-end">
             <button
               onClick={handleSave}
+              disabled={loading()}
               aria-label="Add the note"
-              class="bg-black text-white dark:bg-neutral-100 dark:text-black text-sm px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-neutral-800 dark:hover:bg-neutral-200 fade">
-              Add
-              <Check size={18} strokeWidth={2.5} />
+              class="bg-black text-white dark:bg-neutral-100 dark:text-black text-sm px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 fade">
+              {loading() ? (
+                'Adding...'
+              ) : (
+                <>
+                  Add
+                  <Check size={18} strokeWidth={2.5} />
+                </>
+              )}
             </button>
           </div>
         </section>

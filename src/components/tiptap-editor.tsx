@@ -1,7 +1,6 @@
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import { onCleanup, onMount } from 'solid-js';
-import Toolbar from './toolbar';
 
 interface Props {
   content: string;
@@ -37,7 +36,6 @@ export default function TiptapEditor(props: Props) {
 
   return (
     <div>
-      <Toolbar />
       <div ref={editorElement} />
     </div>
   );
