@@ -2,7 +2,7 @@
 
 ![image alt](screenshot.png)
 
-NotoHub is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4**.
+NotoHub is a premium, production-ready, minimalist note-taking web application designed with modern, calming aesthetics. Built using **Solid.js**, **TypeScript**, **Tailwind CSS v4** and **Supabase**.
 
 ---
 
@@ -20,6 +20,7 @@ NotoHub is a premium, production-ready, minimalist note-taking web application d
 - **Bundler & Dev Server:** [Vite](https://vite.dev/)
 - **Routing:** `@solidjs/router`
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Auth and Databse:** [Supabase](https://supabase.com/)
 - **Icons & Typography:** Google Roboto Font & Lucide Icons
 
 ---
