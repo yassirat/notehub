@@ -35,7 +35,7 @@ export const SignUp = (props: ShowFormProps) => {
         placeholder="Email"
         value={email()}
         onInput={(e) => setEmail(e.currentTarget.value)}
-        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-xs font-medium w-full"
+        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-sm font-medium w-full"
       />
       <input
         type="password"
@@ -43,9 +43,9 @@ export const SignUp = (props: ShowFormProps) => {
         placeholder="Password"
         value={password()}
         onInput={(e) => setPassword(e.currentTarget.value)}
-        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-xs font-medium w-full"
+        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-sm font-medium w-full"
       />
-      <p class="text-xs">
+      <p class="text-sm">
         Already have an account?{' '}
         <span
           class=" text-neutral-400 font-semibold cursor-pointer hover:underline"
@@ -55,7 +55,7 @@ export const SignUp = (props: ShowFormProps) => {
       </p>
       <button
         type="submit"
-        class="bg-neutral-200 text-neutral-900 text-xs uppercase py-2 px-4 rounded transition-colors duration-300 hover:bg-neutral-300">
+        class="bg-neutral-200 text-neutral-900 text-sm uppercase py-2 px-4 rounded transition-colors duration-300 hover:bg-neutral-300">
         Sign up
       </button>
 
@@ -95,7 +95,7 @@ export const SignIn = (props: ShowFormProps) => {
         placeholder="Email"
         value={email()}
         onInput={(e) => setEmail(e.currentTarget.value)}
-        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-xs font-medium w-full"
+        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-sm font-medium w-full"
       />
       <input
         type="password"
@@ -103,9 +103,9 @@ export const SignIn = (props: ShowFormProps) => {
         placeholder="Password"
         value={password()}
         onInput={(e) => setPassword(e.currentTarget.value)}
-        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-xs font-medium w-full"
+        class="border-neutral-700 border rounded-sm py-2 px-2 focus:outline-none text-sm font-medium w-full"
       />
-      <p class="text-xs">
+      <p class="text-sm">
         No account yet?{' '}
         <span
           class=" text-neutral-700 font-semibold cursor-pointer hover:underline"
@@ -116,7 +116,7 @@ export const SignIn = (props: ShowFormProps) => {
       <button
         type="submit"
         onClick={handleSignIn}
-        class="bg-neutral-200 text-neutral-900 text-xs uppercase py-2 px-4 font-medium rounded transition-colors duration-300 hover:bg-neutral-300">
+        class="bg-neutral-200 text-neutral-900 text-sm uppercase py-2 px-4 font-medium rounded transition-colors duration-300 hover:bg-neutral-300">
         Sign in
       </button>
 
