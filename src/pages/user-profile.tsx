@@ -20,6 +20,17 @@ export default function UserProfile() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${hours}:${minutes} | ${day} ${month} ${year}`;
+  };
+
   const [isSignOutModalOpen, setIsSignOutModalOpen] = createSignal(false);
 
   return (
@@ -29,12 +40,15 @@ export default function UserProfile() {
         <Show when={!loading()} fallback={<div>Loading...</div>}>
           <Show when={user()} fallback={<div>Not logged in</div>}>
             <div class="px-4 py-6 dark:shadow-note-dark shadow-note rounded-lg fade grid place-items-center gap-4">
-              <h2 class="text-lg font-semibold">{user()?.email}</h2>
+              <h4 class="text-lg font-semibold">{user()?.email}</h4>
+              <h4 class="font-medium">
+                Created at: {formatDate(user()?.created_at!)}
+              </h4>
               <button
                 type="button"
-                class="bg-neutral-900 text-white dark:bg-neutral-200 dark:text-black rounded-full font-medium text-sm transition-colors duration-200 hover:bg-neutral-800 dark:hover:bg-neutral-300 fade py-2 px-5 flex items-center gap-2 justify-center"
+                class="bg-red-700 text-white rounded-full font-medium text-sm transition-colors duration-200 hover:bg-red-600 fade py-2 px-5 flex items-center gap-2 justify-center"
                 onClick={() => setIsSignOutModalOpen(true)}>
-                Sign out
+                Sign Out
                 <LogOutIcon size={16} strokeWidth={2.5} />
               </button>
             </div>
