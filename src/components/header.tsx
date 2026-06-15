@@ -45,10 +45,10 @@ export default function Header(props: HeaderProps) {
         <Switch>
           {/* Home route */}
           <Match when={location.pathname === '/'}>
-            <div class="flex items-center gap-2">
+            <A href="/" class="flex items-center gap-2">
               <img src={pencil} alt="logo" class="w-8" />
               <h1 class="text-xl font-bold hidden md:block">NotoHub</h1>
-            </div>
+            </A>
             <div class="flex items-center gap-2">
               <A
                 href="/user"
