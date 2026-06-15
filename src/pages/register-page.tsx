@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const toggleForm = () => setIsSignUp(!isSignUp());
 
   return (
-    <main class="dark:bg-neutral-950 dark:text-neutral-200 min-h-dvh w-full place-content-center font-main">
+    <main class="dark:bg-neutral-950 dark:text-white min-h-dvh w-full place-content-center font-main">
       <article class="max-w-sm mx-auto px-4">
         <Switch>
           <Match when={isSignUp()}>
