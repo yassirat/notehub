@@ -1,11 +1,11 @@
-import { useNavigate, useParams } from '@solidjs/router';
-import { createEffect, createSignal, onMount } from 'solid-js';
+import { useNavigate, useParams } from "@solidjs/router";
+import { createEffect, createSignal, onMount } from "solid-js";
 
-import { toast } from 'solid-sonner';
-import ConfirmModal from '../components/confirm-modal';
-import Header from '../components/header';
-import Loading from '../components/loading';
-import { useNotes } from '../context/note-context';
+import { toast } from "solid-sonner";
+import ConfirmModal from "../components/confirm-modal";
+import Header from "../components/header";
+import Loading from "../components/loading";
+import { useNotes } from "../context/note-context";
 
 export default function NotePage() {
   const { getNoteById, updateNote, deleteNote } = useNotes();
@@ -14,8 +14,8 @@ export default function NotePage() {
   const navigate = useNavigate();
 
   const note = getNoteById(params.id!);
-  const [title, setTitle] = createSignal(note?.title || '');
-  const [description, setDescription] = createSignal(note?.description || '');
+  const [title, setTitle] = createSignal(note?.title || "");
+  const [description, setDescription] = createSignal(note?.description || "");
   const [loading, setLoading] = createSignal(false);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = createSignal(false);
@@ -29,7 +29,7 @@ export default function NotePage() {
   });
 
   if (!note) {
-    return <h1 class="text-center text-2xl mt-10">Note not found</h1>;
+    return <h1 class="mt-10 text-center text-2xl">Note not found</h1>;
   }
 
   const handleUpdate = async () => {
@@ -37,9 +37,9 @@ export default function NotePage() {
 
     try {
       await updateNote(note.id, title(), description());
-      toast.success('Note has been edited');
+      toast.success("Note has been edited");
     } catch (error) {
-      toast.error('Failed to update note');
+      toast.error("Failed to update note");
       console.error(error);
     } finally {
       setLoading(false);
@@ -52,13 +52,13 @@ export default function NotePage() {
 
     try {
       await deleteNote(note.id);
-      toast.success('Note has been removed');
+      toast.success("Note has been removed");
 
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 300);
     } catch (error) {
-      toast.error('Failed to delete note');
+      toast.error("Failed to delete note");
       console.error(error);
     } finally {
       setLoading(false);
@@ -67,11 +67,11 @@ export default function NotePage() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = date.toLocaleDateString("en-US", { month: "long" });
     const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
 
     return `${day} ${month} ${year} ${hours}:${minutes}`;
   };
@@ -80,7 +80,7 @@ export default function NotePage() {
 
   const handleInput = () => {
     if (textareaRef) {
-      textareaRef.style.height = 'auto';
+      textareaRef.style.height = "auto";
       textareaRef.style.height = `${textareaRef.scrollHeight}px`;
       setDescription(textareaRef.value);
     }
@@ -102,7 +102,7 @@ export default function NotePage() {
   }
 
   return (
-    <article class="min-h-dvh grid grid-rows-[auto_1fr] font-main bg-neutral-100 dark:bg-neutral-950 dark:text-white">
+    <article class="font-main grid min-h-dvh grid-rows-[auto_1fr] bg-neutral-100 dark:bg-neutral-950 dark:text-white">
       <Header
         setIsDeleteModalOpen={setIsDeleteModalOpen}
         isEdited={isEdited}
@@ -110,18 +110,18 @@ export default function NotePage() {
       />
 
       <main class="p-4">
-        <section class="max-w-xl mx-auto">
+        <section class="mx-auto max-w-xl">
           <div class="mb-2 -space-y-2">
             <input
               value={title()}
               onInput={(e) => setTitle(e.currentTarget.value)}
-              class="w-full p-3 font-semibold capitalize focus:outline-none fade"
+              class="fade w-full p-3 font-semibold capitalize focus:outline-none"
             />
 
-            <p class="text-xs text-gray-700 dark:text-gray-500 font-medium pl-3 fade">
+            <p class="fade pl-3 text-xs font-medium text-gray-500 dark:text-gray-500">
               {formatDate(note.updated_at || note.created_at)}
               <span> | </span>
-              {description().replace(/\s/g, '').length} characters
+              {description().replace(/\s/g, "").length} characters
             </p>
           </div>
 
@@ -129,12 +129,13 @@ export default function NotePage() {
             ref={textareaRef}
             value={description()}
             onInput={handleInput}
-            class="w-full p-3 focus:outline-none resize-none font-medium text-gray-900 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
+            class="w-full resize-none p-3 text-sm leading-relaxed font-medium text-neutral-900 focus:outline-none lg:text-base dark:text-neutral-300"
             style={{
-              'min-height': '100px',
-              'max-height': 'none',
-              overflow: 'hidden',
-            }}></textarea>
+              "min-height": "100px",
+              "max-height": "none",
+              overflow: "hidden",
+            }}
+          ></textarea>
         </section>
       </main>
 
