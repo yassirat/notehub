@@ -1,4 +1,4 @@
-import { Show } from 'solid-js';
+import { Show } from "solid-js";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -9,31 +9,34 @@ interface ConfirmModalProps {
 export default function ConfirmSignOutModal(props: ConfirmModalProps) {
   return (
     <Show when={props.isOpen}>
-      <div class="fixed inset-0 z-50 w-full min-h-dvh flex items-center justify-center p-4">
+      <div class="fixed inset-0 z-50 flex min-h-dvh w-full items-center justify-center p-4">
         {/* Backdrop overlay */}
         <div
           onClick={() => props.onCancel()}
-          class="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur transition-opacity duration-300"
+          class="fixed inset-0 bg-white/30 backdrop-blur transition-opacity duration-300 dark:bg-black/30"
         />
 
         <div
-          class="bg-white dark:bg-black w-full max-w-md p-6 rounded-xl relative z-50 fade-in space-y-4 fade"
-          style={{ 'box-shadow': 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}>
-          <div class="text-sm grid place-items-center gap-2">
-            <h3 class="font-medium text-lg fade">Deleting notes</h3>
-            <p class="text-sm font-medium text-neutral-700 dark:text-neutral-300 fade">
+          class="fade-in fade relative z-50 w-full max-w-md space-y-4 rounded-xl bg-white p-6 dark:bg-black"
+          style={{ "box-shadow": "rgba(149, 157, 165, 0.3) 0px 8px 24px" }}
+        >
+          <div class="grid place-items-center gap-2 text-sm">
+            <h3 class="fade text-lg font-medium">Deleting notes</h3>
+            <p class="fade text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Do you want to sign out?
             </p>
           </div>
           <div class="flex justify-center gap-3">
             <button
               onClick={() => props.onCancel()}
-              class="bg-gray-700 text-white hover:bg-gray-600 transition-colors duration-200 text-sm px-8 py-2 rounded-4xl flex items-center gap-2 fade">
+              class="fade flex items-center gap-2 rounded-4xl bg-gray-700 px-8 py-2 text-sm text-white transition-colors duration-200 hover:bg-gray-600"
+            >
               Cancel
             </button>
             <button
               onClick={() => props.onConfirm()}
-              class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 text-sm px-8 py-2 rounded-4xl flex items-center gap-2 fade">
+              class="fade flex items-center gap-2 rounded-4xl bg-red-700 px-8 py-2 text-sm text-white transition-colors duration-200 hover:bg-red-600"
+            >
               Yes
             </button>
           </div>
