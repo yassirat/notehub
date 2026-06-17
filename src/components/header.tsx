@@ -1,16 +1,10 @@
-import { A, useLocation } from '@solidjs/router';
-import {
-  CheckIcon,
-  Moon,
-  MoveLeft,
-  Sun,
-  Trash2Icon,
-  UserRound,
-} from 'lucide-solid';
-import { createEffect, createSignal, Match, Show, Switch } from 'solid-js';
+import { A, useLocation } from "@solidjs/router";
+import { CheckIcon, Moon, MoveLeft, Sun, Trash2Icon } from "lucide-solid";
+import { createEffect, createSignal, Match, Show, Switch } from "solid-js";
 
-import { useNotes } from '../context/note-context';
-import pencil from '/pencil_3075908.png';
+import { useNotes } from "../context/note-context";
+import { useAuth } from "../context/sign-context";
+import pencil from "/pencil_3075908.png";
 
 interface HeaderProps {
   setIsDeleteModalOpen?: (value: boolean) => void;
@@ -27,42 +21,46 @@ export default function Header(props: HeaderProps) {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode());
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', darkMode() ? 'dark' : 'light');
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", darkMode() ? "dark" : "light");
   };
 
   createEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
       setDarkMode(true);
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     }
   });
 
+  const { user } = useAuth();
+
   return (
-    <header class="py-4 px-4">
-      <nav class="max-w-3xl mx-auto flex justify-between items-center sticky top-0">
+    <header class="px-4 py-4">
+      <nav class="sticky top-0 mx-auto flex max-w-3xl items-center justify-between">
         <Switch>
           {/* Home route */}
-          <Match when={location.pathname === '/'}>
+          <Match when={location.pathname === "/"}>
             <A href="/" class="flex items-center gap-2">
               <img src={pencil} alt="logo" class="w-8" />
-              <h1 class="text-xl font-bold hidden md:block">NotoHub</h1>
+              <h1 class="hidden text-xl font-bold md:block">NotoHub</h1>
             </A>
             <div class="flex items-center gap-2">
               <A
                 href="/user"
                 title="profile"
                 aria-label="Go to user profile"
-                class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900">
-                <UserRound size={18} strokeWidth={2.5} />
+                class="flex size-8 items-center justify-center rounded-full bg-neutral-900 p-2 font-medium text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300"
+              >
+                {user()?.email?.slice(0, 1).toUpperCase()}
               </A>
               <button
                 type="button"
                 onClick={toggleDarkMode}
                 title="Change theme"
                 aria-label="Change theme"
-                class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-900">
+                class="rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-900"
+              >
                 {darkMode() ? (
                   <Sun size={18} strokeWidth={2.5} fill="true" />
                 ) : (
@@ -75,22 +73,23 @@ export default function Header(props: HeaderProps) {
           {/* Create route */}
           <Match
             when={
-              location.pathname === '/create' || location.pathname === '/user'
-            }>
+              location.pathname === "/create" || location.pathname === "/user"
+            }
+          >
             <A href="/" aria-label="Go back">
               <MoveLeft size={24} strokeWidth={2.5} />
             </A>
           </Match>
 
           {/* About route */}
-          <Match when={location.pathname === '/about'}>
+          <Match when={location.pathname === "/about"}>
             <A href="/" aria-label="Go back">
               <MoveLeft size={24} strokeWidth={2.5} />
             </A>
           </Match>
 
           {/* Note detail route */}
-          <Match when={location.pathname.startsWith('/notes/')}>
+          <Match when={location.pathname.startsWith("/notes/")}>
             <A href="/" aria-label="Go back">
               <MoveLeft size={24} strokeWidth={2.5} />
             </A>
@@ -102,9 +101,10 @@ export default function Header(props: HeaderProps) {
                   title="Edit note"
                   aria-label="Edit note"
                   disabled={loading()}
-                  class="bg-lime-700 hover:bg-lime-600 text-white text-sm transition-colors p-2 rounded-lg hide-show disabled:opacity-50">
+                  class="hide-show rounded-lg bg-lime-700 p-2 text-sm text-white transition-colors hover:bg-lime-600 disabled:opacity-50"
+                >
                   {loading() ? (
-                    'Saving...'
+                    "Saving..."
                   ) : (
                     <div class="flex items-center gap-2 px-1">
                       <CheckIcon size={16} strokeWidth={2.5} />
@@ -118,7 +118,8 @@ export default function Header(props: HeaderProps) {
                 onClick={() => props.setIsDeleteModalOpen?.(true)}
                 title="Delete note"
                 aria-label="Delete note"
-                class="bg-red-700 text-white hover:bg-red-600 transition-colors duration-200 p-2 rounded-lg fade">
+                class="fade rounded-lg bg-red-700 p-2 text-white transition-colors duration-200 hover:bg-red-600"
+              >
                 <Trash2Icon size={16} strokeWidth={2.5} />
               </button>
             </div>
