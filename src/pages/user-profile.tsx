@@ -42,7 +42,7 @@ export default function UserProfile() {
             <div class="dark:shadow-note-dark shadow-note fade grid place-items-center gap-4 rounded-lg px-4 py-6">
               <h4 class="text-lg font-semibold">{user()?.email}</h4>
               <h4 class="font-medium">
-                Created: {formatDate(user()?.created_at!)}
+                Joined: {formatDate(user()?.created_at!)}
               </h4>
               <button
                 type="button"
