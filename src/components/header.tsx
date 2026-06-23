@@ -42,7 +42,7 @@ export default function Header(props: HeaderProps) {
           {/* Home route */}
           <Match when={location.pathname === "/"}>
             <A href="/" class="flex items-center gap-2">
-              <img src={pencil} alt="logo" class="w-8" />
+              <img src={pencil} alt="logo" class="w-6" />
               <h1 class="hidden text-xl font-bold md:block">NotoHub</h1>
             </A>
             <div class="flex items-center gap-2">
@@ -50,7 +50,7 @@ export default function Header(props: HeaderProps) {
                 href="/user"
                 title="profile"
                 aria-label="Go to user profile"
-                class="flex size-8 items-center justify-center rounded-full bg-neutral-900 p-2 font-medium text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300"
+                class="flex size-8 items-center justify-center rounded-full bg-neutral-900 p-2 font-semibold text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300"
               >
                 {user()?.email?.slice(0, 1).toUpperCase()}
               </A>
