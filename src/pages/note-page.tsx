@@ -115,7 +115,7 @@ export default function NotePage() {
             <input
               value={title()}
               onInput={(e) => setTitle(e.currentTarget.value)}
-              class="fade w-full p-3 font-semibold capitalize focus:outline-none"
+              class="fade w-full p-3 font-semibold capitalize focus:outline-none lg:text-lg"
             />
 
             <p class="fade pl-3 text-xs font-medium text-gray-500 dark:text-gray-500">
@@ -129,7 +129,7 @@ export default function NotePage() {
             ref={textareaRef}
             value={description()}
             onInput={handleInput}
-            class="w-full resize-none p-3 text-sm leading-relaxed font-medium text-neutral-900 focus:outline-none lg:text-base dark:text-neutral-300"
+            class="w-full resize-none p-3 leading-relaxed font-medium text-neutral-900 focus:outline-none dark:text-neutral-300"
             style={{
               "min-height": "100px",
               "max-height": "none",
