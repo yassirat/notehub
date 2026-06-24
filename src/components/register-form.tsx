@@ -2,7 +2,7 @@ import { useNavigate } from "@solidjs/router";
 import { createSignal, Show } from "solid-js";
 import { useAuth } from "../context/sign-context";
 import type { ShowFormProps } from "../pages/register-page";
-import Loading from "./loading";
+import { SpinnerLoading } from "./loading";
 
 export const SignUp = (props: ShowFormProps) => {
   const { signUp } = useAuth();
@@ -23,7 +23,7 @@ export const SignUp = (props: ShowFormProps) => {
     } catch (err) {
       setError(`${err}: error occured`);
     } finally {
-      <Loading />;
+      <SpinnerLoading />;
     }
   };
 

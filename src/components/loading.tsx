@@ -1,4 +1,8 @@
-function Loading() {
+export const SkeletonLoading = () => {
+  return <div class="h-7 w-full rounded-md bg-slate-400"></div>;
+};
+
+export const SpinnerLoading = () => {
   return (
     // <!-- From Uiverse.io by devAaus -->
     <div class="flex min-h-dvh w-full flex-col items-center justify-center gap-4 dark:bg-neutral-950">
@@ -7,6 +11,4 @@ function Loading() {
       </div>
     </div>
   );
-}
-
-export default Loading;
+};
