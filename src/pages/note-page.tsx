@@ -4,7 +4,7 @@ import { createEffect, createSignal, onMount } from "solid-js";
 import { toast } from "solid-sonner";
 import ConfirmModal from "../components/confirm-modal";
 import Header from "../components/header";
-import Loading from "../components/loading";
+import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
 
 export default function NotePage() {
@@ -98,7 +98,7 @@ export default function NotePage() {
   };
 
   if (loading()) {
-    return <Loading />;
+    return <DotLoading />;
   }
 
   return (

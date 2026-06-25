@@ -2,7 +2,7 @@ import { A } from "@solidjs/router";
 import { PlusIcon } from "lucide-solid";
 import { For, Show } from "solid-js";
 import Header from "../components/header";
-import { SkeletonLoading } from "../components/loading";
+import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
     <article class="font-main grid min-h-dvh grid-rows-[auto_1fr] bg-neutral-100 dark:bg-neutral-950 dark:text-white">
       <Header />
 
-      <section class="relative mx-auto mt-8 flex w-full max-w-xl flex-col gap-4 px-6">
+      <section class="relative mx-auto flex w-full max-w-xl flex-col gap-4 px-6 py-8">
         <Show
           when={loading()}
           fallback={
@@ -80,7 +80,7 @@ export default function Home() {
             </Show>
           }
         >
-          <SkeletonLoading />
+          <DotLoading />
         </Show>
       </section>
     </article>
