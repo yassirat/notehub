@@ -36,21 +36,21 @@ export default function Header(props: HeaderProps) {
   const { user } = useAuth();
 
   return (
-    <header class="px-4 py-4">
-      <nav class="sticky top-0 mx-auto flex max-w-3xl items-center justify-between">
+    <header class="sticky top-0 z-10 bg-neutral-100 px-4 py-4 dark:bg-neutral-950">
+      <nav class="mx-auto flex max-w-3xl items-center justify-between">
         <Switch>
           {/* Home route */}
           <Match when={location.pathname === "/"}>
             <A href="/" class="flex items-center gap-2">
               <img src={pencil} alt="logo" class="w-6" />
-              <h1 class="hidden text-xl font-bold md:block">NotoHub</h1>
+              <h1 class="hidden text-xl font-extrabold md:block">NotoHub</h1>
             </A>
             <div class="flex items-center gap-2">
               <A
                 href="/user"
                 title="profile"
                 aria-label="Go to user profile"
-                class="flex size-8 items-center justify-center rounded-full bg-neutral-900 p-2 font-semibold text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300"
+                class="flex size-7 items-center justify-center rounded-full bg-neutral-900 p-2 text-sm font-semibold text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300"
               >
                 {user()?.email?.slice(0, 1).toUpperCase()}
               </A>
