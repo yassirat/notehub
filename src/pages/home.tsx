@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { PlusIcon } from "lucide-solid";
-import { For, Show } from "solid-js";
+import { createEffect, createSignal, For, Show } from "solid-js";
 import Header from "../components/header";
 import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
@@ -8,18 +8,69 @@ import { useNotes } from "../context/note-context";
 export default function Home() {
   const { notes, loading } = useNotes();
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = date.toLocaleDateString("en-US", { month: "long" });
-    const year = date.getFullYear();
+  const [screenWidth, setScreenWidth] = createSignal(window.innerWidth);
 
-    return `${day} ${month} ${year}`;
+  // const formatDate = (dateString: string) => {
+  //   const date = new Date(dateString);
+  //   const day = String(date.getDate()).padStart(2, "0");
+  //   const month = date.toLocaleDateString("en-US", { month: "long" });
+  //   const year = date.getFullYear();
+
+  //   return `${day} ${month} ${year}`;
+  // };
+
+  const formatRelativeDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    // Check if it's today
+    if (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    ) {
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${hours}:${minutes}`;
+    }
+
+    // Check if it's yesterday
+    if (
+      date.getDate() === yesterday.getDate() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getFullYear() === yesterday.getFullYear()
+    ) {
+      return "Yesterday";
+    }
+
+    // Otherwise show full date
+    // const day = String(date.getDate()).padStart(2, "0");
+    // const month = date.toLocaleDateString("en-US", { month: "long" });
+    // const year = date.getFullYear();
+    return date.toLocaleDateString();
   };
 
-  // const getLastModifiedDate = (n: Note) => {
-  //   return new Date(n.updatedAt || n.createdAt).getTime();
-  // };
+  createEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
+  const getMaxLength = () => {
+    const width = screenWidth();
+    if (width < 640) return 30; // Mobile
+    if (width < 1024) return 50; // Tablet
+    return 80; // Desktop
+  };
+
+  const truncateText = (text: string, maxLength: number) => {
+    const firstLine = text.split("\n")[0];
+    return firstLine.length > maxLength
+      ? `${firstLine.slice(0, maxLength)}...`
+      : firstLine;
+  };
 
   return (
     <article class="font-main grid min-h-dvh grid-rows-[auto_1fr] bg-neutral-100 dark:bg-neutral-950 dark:text-white">
@@ -62,15 +113,15 @@ export default function Home() {
                       href={`/notes/${note.id}`}
                       class="fade shadow-note dark:shadow-note-dark rounded-md bg-neutral-50 p-4 transition-transform duration-200 hover:-translate-y-1 dark:bg-black"
                     >
-                      <h2 class="font-semibold capitalize">{note.title}</h2>
-                      <p class="text-sm font-medium text-neutral-800 dark:text-neutral-400">
-                        {note.description.length > 40
-                          ? `${note.description.split("\n")[0].slice(0, 40)}...`
-                          : note.description.split("\n")[0]}
-                      </p>
-                      <div class="flex items-center justify-between">
-                        <p class="text-xs font-medium text-neutral-600">
-                          {formatDate(note.updated_at || note.created_at)}
+                      <h2 class="text-sm font-semibold capitalize">
+                        {truncateText(note.title, getMaxLength())}
+                      </h2>
+                      <div class="flex items-center gap-2">
+                        <span class="text-xs font-medium text-nowrap text-neutral-700 dark:text-neutral-300">
+                          {formatRelativeDate(note.created_at)}
+                        </span>
+                        <p class="text-xs font-medium text-nowrap text-neutral-600 dark:text-neutral-400">
+                          {truncateText(note.description, getMaxLength())}
                         </p>
                       </div>
                     </A>
