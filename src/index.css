@@ -49,7 +49,7 @@
 }
 
 @theme {
-  --font-main: 'Noto Sans', sans-serif;
+  --font-main: 'DM Sans', sans-serif;
   --shadow-note: 0px 7px 29px 0px rgba(0, 0, 0, 0.05);
   --shadow-note-dark: 0px 7px 29px 0px rgba(240, 237, 237, 0.08);
 }
