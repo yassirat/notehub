@@ -6,6 +6,7 @@ import ConfirmModal from "../components/confirm-modal";
 import Header from "../components/header";
 import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
+import { formatRelativeDate } from "../utils/format-date";
 
 export default function NotePage() {
   const { getNoteById, updateNote, deleteNote } = useNotes();
@@ -65,17 +66,6 @@ export default function NotePage() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = date.toLocaleDateString("en-US", { month: "long" });
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-
-    return `${day} ${month} ${year} ${hours}:${minutes}`;
-  };
-
   let textareaRef: HTMLTextAreaElement | undefined;
 
   const handleInput = () => {
@@ -119,7 +109,7 @@ export default function NotePage() {
             />
 
             <p class="fade pl-3 text-xs font-medium text-gray-500 dark:text-gray-500">
-              {formatDate(note.updated_at || note.created_at)}
+              {formatRelativeDate(note.updated_at || note.created_at)}
               <span> | </span>
               {description().replace(/\s/g, "").length} characters
             </p>
