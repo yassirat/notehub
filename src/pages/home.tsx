@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { PlusIcon } from "lucide-solid";
+import { PlusIcon, SquarePen } from "lucide-solid";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import Header from "../components/header";
 import { DotLoading } from "../components/loading";
@@ -61,10 +61,9 @@ export default function Home() {
                 <A
                   href="/create"
                   aria-label="Create a new note"
-                  class="fade ml-auto flex items-center gap-2 rounded-lg bg-neutral-900 px-3 py-2 text-xs font-medium text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
+                  class="fade ml-auto rounded-lg bg-neutral-900 p-2 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
                 >
-                  <PlusIcon size={14} strokeWidth={2.5} />
-                  Create
+                  <SquarePen size={14} strokeWidth={2.7} />
                 </A>
                 <For each={notes()}>
                   {(note) => (

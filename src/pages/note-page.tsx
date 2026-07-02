@@ -6,7 +6,7 @@ import ConfirmModal from "../components/confirm-modal";
 import Header from "../components/header";
 import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
-import { formatRelativeDate } from "../utils/format-date";
+import { formatDate } from "../utils/format-date";
 
 export default function NotePage() {
   const { getNoteById, updateNote, deleteNote } = useNotes();
@@ -108,8 +108,8 @@ export default function NotePage() {
               class="fade w-full p-3 font-semibold capitalize focus:outline-none lg:text-lg"
             />
 
-            <p class="fade pl-3 text-xs font-medium text-gray-500 dark:text-gray-500">
-              {formatRelativeDate(note.updated_at || note.created_at)}
+            <p class="fade pl-3 text-xs font-medium text-gray-600 dark:text-gray-400">
+              {formatDate(note.updated_at || note.created_at)}
               <span> | </span>
               {description().replace(/\s/g, "").length} characters
             </p>

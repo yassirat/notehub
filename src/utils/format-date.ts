@@ -1,3 +1,14 @@
+export const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleDateString("en-US", { month: "long" });
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+};
+
 export const formatRelativeDate = (dateString: string) => {
   const date = new Date(dateString);
   const today = new Date();
