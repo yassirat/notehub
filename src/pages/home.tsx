@@ -58,13 +58,18 @@ export default function Home() {
               }
             >
               <div class="grid gap-4">
-                <A
-                  href="/create"
-                  aria-label="Create a new note"
-                  class="fade ml-auto rounded-lg bg-neutral-900 p-2 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
-                >
-                  <SquarePen size={14} strokeWidth={2.7} />
-                </A>
+                <div class="pointer-events-none fixed right-0 bottom-12 left-0 flex justify-center">
+                  <div class="pointer-events-auto flex w-full max-w-xl justify-end pr-6">
+                    <A
+                      href="/create"
+                      aria-label="Create a new note"
+                      class="fade ml-auto rounded-lg bg-neutral-900 p-2 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
+                    >
+                      <SquarePen size={14} strokeWidth={2.7} />
+                    </A>
+                  </div>
+                </div>
+
                 <For each={notes()}>
                   {(note) => (
                     <A
