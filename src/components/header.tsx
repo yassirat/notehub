@@ -40,8 +40,8 @@ export default function Header(props: HeaderProps) {
         <Switch>
           {/* Home route */}
           <Match when={location.pathname === "/"}>
-            <A href="/" class="flex items-center gap-2">
-              <h1 class="hidden text-xl font-extrabold md:block">NotoHub.</h1>
+            <A href="/" class="text-xl font-extrabold">
+              NotoHub.
             </A>
             <div class="flex items-center gap-2">
               <A
