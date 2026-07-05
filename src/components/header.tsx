@@ -4,7 +4,6 @@ import { createEffect, createSignal, Match, Show, Switch } from "solid-js";
 
 import { useNotes } from "../context/note-context";
 import { useAuth } from "../context/sign-context";
-import pencil from "/pencil_3075908.png";
 
 interface HeaderProps {
   setIsDeleteModalOpen?: (value: boolean) => void;
@@ -42,8 +41,7 @@ export default function Header(props: HeaderProps) {
           {/* Home route */}
           <Match when={location.pathname === "/"}>
             <A href="/" class="flex items-center gap-2">
-              <img src={pencil} alt="logo" class="w-6" />
-              <h1 class="hidden text-xl font-extrabold md:block">NotoHub</h1>
+              <h1 class="hidden text-xl font-extrabold md:block">NotoHub.</h1>
             </A>
             <div class="flex items-center gap-2">
               <A
