@@ -63,9 +63,9 @@ export default function Home() {
                     <A
                       href="/create"
                       aria-label="Create a new note"
-                      class="fade ml-auto rounded-lg bg-neutral-900 p-2 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
+                      class="fade ml-auto rounded-full bg-neutral-900 p-3 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
                     >
-                      <SquarePen size={14} strokeWidth={2.7} />
+                      <SquarePen size={18} strokeWidth={2.5} />
                     </A>
                   </div>
                 </div>
