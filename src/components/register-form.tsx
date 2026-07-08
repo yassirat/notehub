@@ -35,7 +35,7 @@ export const SignUp = (props: ShowFormProps) => {
         placeholder="Email"
         value={email()}
         onInput={(e) => setEmail(e.currentTarget.value)}
-        class="w-full rounded-sm border border-neutral-700 p-2 text-sm font-medium focus:outline-none"
+        class="w-full rounded-sm border border-neutral-700 p-2 font-medium focus:outline-none"
       />
       <input
         type="password"
@@ -43,9 +43,9 @@ export const SignUp = (props: ShowFormProps) => {
         placeholder="Password"
         value={password()}
         onInput={(e) => setPassword(e.currentTarget.value)}
-        class="w-full rounded-sm border border-neutral-700 p-2 text-sm font-medium focus:outline-none"
+        class="w-full rounded-sm border border-neutral-700 p-2 font-medium focus:outline-none"
       />
-      <p class="text-sm">
+      <p>
         Already have an account?{" "}
         <span
           class="cursor-pointer font-semibold text-neutral-400 hover:underline"
@@ -56,7 +56,7 @@ export const SignUp = (props: ShowFormProps) => {
       </p>
       <button
         type="submit"
-        class="rounded bg-neutral-200 px-4 py-2 text-sm text-neutral-900 uppercase transition-colors duration-300 hover:bg-neutral-300"
+        class="rounded bg-neutral-200 px-4 py-2 text-neutral-900 uppercase transition-colors duration-300 hover:bg-neutral-300"
       >
         Sign up
       </button>
@@ -97,7 +97,7 @@ export const SignIn = (props: ShowFormProps) => {
         placeholder="Email"
         value={email()}
         onInput={(e) => setEmail(e.currentTarget.value)}
-        class="w-full rounded-sm border border-neutral-700 p-2 text-sm font-medium focus:outline-none"
+        class="w-full rounded-sm border border-neutral-700 p-2 font-medium focus:outline-none"
       />
       <input
         type="password"
@@ -105,9 +105,9 @@ export const SignIn = (props: ShowFormProps) => {
         placeholder="Password"
         value={password()}
         onInput={(e) => setPassword(e.currentTarget.value)}
-        class="w-full rounded-sm border border-neutral-700 p-2 text-sm font-medium focus:outline-none"
+        class="w-full rounded-sm border border-neutral-700 p-2 font-medium focus:outline-none"
       />
-      <p class="text-sm">
+      <p>
         No account yet?{" "}
         <span
           class="cursor-pointer font-semibold text-neutral-700 hover:underline"
@@ -119,7 +119,7 @@ export const SignIn = (props: ShowFormProps) => {
       <button
         type="submit"
         onClick={handleSignIn}
-        class="rounded bg-neutral-200 px-4 py-2 text-sm font-medium text-neutral-900 uppercase transition-colors duration-300 hover:bg-neutral-300"
+        class="rounded bg-neutral-200 px-4 py-2 font-medium text-neutral-900 uppercase transition-colors duration-300 hover:bg-neutral-300"
       >
         Sign in
       </button>
