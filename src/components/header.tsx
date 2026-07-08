@@ -99,15 +99,12 @@ export default function Header(props: HeaderProps) {
                   title="Edit note"
                   aria-label="Edit note"
                   disabled={loading()}
-                  class="hide-show rounded-lg bg-lime-700 p-2 text-sm text-white transition-colors hover:bg-lime-600 disabled:opacity-50"
+                  class="hide-show rounded-lg bg-lime-700 p-2 text-white transition-colors hover:bg-lime-600 disabled:opacity-50"
                 >
                   {loading() ? (
                     "Saving..."
                   ) : (
-                    <div class="flex items-center gap-2 px-1">
-                      <CheckIcon size={16} strokeWidth={2.5} />
-                      <span class="hidden sm:block">Edit</span>
-                    </div>
+                    <CheckIcon size={16} strokeWidth={2.5} />
                   )}
                 </button>
               </Show>
