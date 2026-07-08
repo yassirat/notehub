@@ -1,5 +1,12 @@
 import { A, useLocation } from "@solidjs/router";
-import { CheckIcon, Moon, MoveLeft, Sun, Trash2Icon } from "lucide-solid";
+import {
+  CheckIcon,
+  LoaderCircle,
+  Moon,
+  MoveLeft,
+  Sun,
+  Trash2Icon,
+} from "lucide-solid";
 import { createEffect, createSignal, Match, Show, Switch } from "solid-js";
 
 import { useNotes } from "../context/note-context";
@@ -102,7 +109,11 @@ export default function Header(props: HeaderProps) {
                   class="hide-show rounded-lg bg-lime-700 p-2 text-white transition-colors hover:bg-lime-600 disabled:opacity-50"
                 >
                   {loading() ? (
-                    "Saving..."
+                    <LoaderCircle
+                      size={16}
+                      strokeWidth={2.5}
+                      class="animate-spin"
+                    />
                   ) : (
                     <CheckIcon size={16} strokeWidth={2.5} />
                   )}
