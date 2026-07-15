@@ -2,7 +2,7 @@ import { A } from "@solidjs/router";
 import { PlusIcon, SquarePen } from "lucide-solid";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import Header from "../components/header";
-import { DotLoading } from "../components/loading";
+import { SkeletonLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
 import { formatRelativeDate } from "../utils/format-date";
 
@@ -94,7 +94,7 @@ export default function Home() {
             </Show>
           }
         >
-          <DotLoading />
+          <SkeletonLoading />
         </Show>
       </section>
     </article>

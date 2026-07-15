@@ -7,7 +7,7 @@ export default function PrivateRoute(props: any) {
   const { user, loading } = useAuth();
 
   return (
-    <>
+    <article class="grid min-h-dvh dark:bg-neutral-950">
       <Show when={loading()}>
         <SpinnerLoading />
       </Show>
@@ -16,6 +16,6 @@ export default function PrivateRoute(props: any) {
           {props.children}
         </Show>
       </Show>
-    </>
+    </article>
   );
 }
