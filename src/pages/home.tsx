@@ -2,7 +2,7 @@ import { A } from "@solidjs/router";
 import { PlusIcon, SquarePen } from "lucide-solid";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import Header from "../components/header";
-import { SkeletonLoading } from "../components/loading";
+import { DotLoading } from "../components/loading";
 import { useNotes } from "../context/note-context";
 import { formatRelativeDate } from "../utils/format-date";
 
@@ -58,12 +58,12 @@ export default function Home() {
               }
             >
               <div class="grid gap-4">
-                <div class="pointer-events-none fixed right-0 bottom-12 left-0 flex justify-center">
+                <div class="pointer-events-none fixed right-0 bottom-12 left-0 z-10 flex justify-center">
                   <div class="pointer-events-auto flex w-full max-w-xl justify-end pr-6">
                     <A
                       href="/create"
                       aria-label="Create a new note"
-                      class="fade ml-auto rounded-full bg-neutral-900 p-3 text-white transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
+                      class="fade ml-auto rounded-full bg-neutral-900 p-3 text-white shadow transition-colors duration-200 hover:bg-neutral-700 dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300"
                     >
                       <SquarePen size={18} strokeWidth={2.5} />
                     </A>
@@ -94,7 +94,7 @@ export default function Home() {
             </Show>
           }
         >
-          <SkeletonLoading />
+          <DotLoading />
         </Show>
       </section>
     </article>
